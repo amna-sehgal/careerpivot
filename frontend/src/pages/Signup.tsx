@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, Navigate } from 'react-router-dom'
 import { Sparkles, Eye, EyeOff, CheckCircle } from 'lucide-react'
 import api from '../lib/api'
-import { setUser } from '../lib/auth'
+import { setUser, getUser } from '../lib/auth'
 
 export default function Signup() {
+  if (getUser()) return <Navigate to="/dashboard" replace />
   const navigate = useNavigate()
   const [form, setForm] = useState({ firstName: '', lastName: '', email: '', password: '' })
   const [show, setShow] = useState(false)

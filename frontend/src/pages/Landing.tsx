@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import { ArrowRight, Sparkles, TrendingUp, Users, Zap, CheckCircle, BarChart2, Target, BookOpen } from 'lucide-react'
+import { getUser } from '../lib/auth'
 
 const features = [
   { icon: <Target size={20}/>, title: 'Gap Intelligence Engine', desc: 'See your exact readiness % for 3 roles. Not vague. Not generic. Precise skill gap analysis tied to your background.' },
@@ -12,6 +13,8 @@ const features = [
 ]
 
 export default function Landing() {
+  if (getUser()) return <Navigate to="/dashboard" replace />
+
   return (
     <div className="min-h-screen bg-mesh">
       <Navbar/>
