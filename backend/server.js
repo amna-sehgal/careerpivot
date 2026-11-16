@@ -16,6 +16,17 @@ app.use('/api/career',  verifyToken, require('./routes/career'))
 
 app.get('/health', (_, res) => res.json({ ok: true }))
 
+app.get('/debug/openrouter', (req, res) => {
+  const key = process.env.OPENROUTER_API_KEY?.trim()
+
+  res.json({
+    keyExists: !!key,
+    keyLength: key?.length || 0,
+    correctFormat: key?.startsWith('sk-or-v1-') || false,
+    nodeEnvironment: process.env.NODE_ENV
+  })
+})
+
 const PORT = process.env.PORT || 4000
 
 connectDB().then(() => {
